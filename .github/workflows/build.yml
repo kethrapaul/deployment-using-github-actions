@@ -30,7 +30,7 @@ jobs:
           docker push kethrapaul/swiggy-clone:latest
         env:
           DOCKER_CLI_ACI: 1
-deploy:
+  deploy:
     needs: build
     runs-on: [self-hosted]
     steps:
