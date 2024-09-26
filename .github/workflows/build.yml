@@ -35,9 +35,9 @@ jobs:
          runs-on: [self-hosted]
          steps:
               - name: docker pull image
-              run: docker pull aakibkhan1212/swiggy-clone:latest
+              run: docker pull kethrapaul/swiggy-clone:latest
               - name: Image scan
-              run: trivy image aakibkhan1212/swiggy-clone:latest > trivyimagedeploy.txt
+              run: trivy image kethrapaul/swiggy-clone:latest > trivyimagedeploy.txt
               - name: Deploy to container
-              run: docker run -d --name swiggy-clone -p 3000:3000 aakibkhan1212/swiggy-clone:latest  
+              run: docker run -d --name swiggy-clone -p 3000:3000 kethrapaul/swiggy-clone:latest  
 
