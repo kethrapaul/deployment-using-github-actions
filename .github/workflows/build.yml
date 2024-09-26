@@ -18,7 +18,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-       - name: NPM Install
+      - name: NPM Install
           run: npm install
         
       - name: Docker build and push
@@ -30,14 +30,14 @@ jobs:
           docker push kethrapaul/swiggy-clone:latest
         env:
           DOCKER_CLI_ACI: 1
-      deploy:
-         needs: build
-         runs-on: [self-hosted]
-         steps:
-              - name: docker pull image
-              run: docker pull kethrapaul/swiggy-clone:latest
-              - name: Image scan
-              run: trivy image kethrapaul/swiggy-clone:latest > trivyimagedeploy.txt
-              - name: Deploy to container
-              run: docker run -d --name swiggy-clone -p 3000:3000 kethrapaul/swiggy-clone:latest  
+deploy:
+    needs: build
+    runs-on: [self-hosted]
+    steps:
+      - name: docker pull image
+        run: docker pull kethrapaul/swiggy-clone:latest
+      - name: Image scan
+        run: trivy image kethrapaul/swiggy-clone:latest > trivyimagedeploy.txt
+      - name: Deploy to container
+        run: docker run -d --name swiggy-clone -p 3000:3000 kethrapaul/swiggy-clone:latest  
 
